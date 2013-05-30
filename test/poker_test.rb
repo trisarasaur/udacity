@@ -152,7 +152,7 @@ end
 describe 'card number values' do
 
   it 'knows the card number values of a given hand' do
-    #     print card_ranks(['AC', '3D', '4S', 'KH']) #should output [14, 13, 4, 3]
+    card_values(['AC', '3D', '4S', 'KH']).must_equal [14, 13, 4, 3]
   end
 
 end
