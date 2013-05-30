@@ -14,26 +14,24 @@ describe 'poker game' do
   end
 
   it 'gives correct winning hand with three hands' do
-    skip
     poker([@straight_flush, @four_kind, @full_house]).must_equal @straight_flush
-    #     assert poker([sf, fk, fh]) == sf
   end
 
   it 'gives correct winning hand with four of a kind and a full house' do
-    #     assert poker([fk, fh]) == fk
+    poker([@four_kind, @full_house]).must_equal @four_kind
+  end
+  
+  it 'gives correct winning hand when given only one hand' do
+    poker([@straight_flush]).must_equal @straight_flush
   end
 
   it 'gives correct winning hand with identical hands' do
     # this actually tests the wrong thing, it should return two hands, which are identical
-    #     assert poker([fh, fh]) == fh
-  end
-  
-  it 'gives correct winning hand when given only one hand' do
-    #     assert poker([sf]) == sf
+    poker([@full_house, @full_house]).must_equal @full_house
   end
 
   it 'gives correct winning hand when given 100 hands' do
-    #     assert poker([sf] + 99*[fh]) == sf
+    poker([@straight_flush] + [@full_house] * 99).must_equal @straight_flush
   end
 
   it 'returns multiple winning hands when there is a tie' do

@@ -1,6 +1,5 @@
 def poker hands
-
-
+  hands.max_by {|h| hand_rank(h) }
 end
 
 def hand_rank hand
