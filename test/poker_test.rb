@@ -47,11 +47,11 @@ end
 describe 'straight' do 
 
   it 'can tell if a hand is a straight' do
-    #     assert straight([9, 8, 7, 6, 5]) == True
+    straight?([9, 8, 7, 6, 5]).must_equal true
   end
 
   it 'can tell if a hand is not a straight' do
-    #     assert straight([9, 8, 8, 6, 5]) == False
+    straight?([9, 8, 8, 6, 5]).must_equal false
   end
 
 end
@@ -65,11 +65,11 @@ describe 'flush' do
   end
   
   it 'can tell if a hand is a flush' do
-    flush(@straight_flush).must_equal true
+    flush?(@straight_flush).must_equal true
   end
 
   it 'can tell if a hand is not a flush' do
-    flush(@four_kind).must_equal false
+    flush?(@four_kind).must_equal false
   end
 
 end

@@ -14,13 +14,17 @@ def card_values hand
 end
 
 
-def flush hand
+def flush? hand
   suits = hand.map { |card| card[1] }
   if suits.uniq.length == 1
     true
   else
     false
   end
+end
+
+def straight? values
+  (values.last..values.first).to_a.reverse == values && values.max - values.min == 4
 end
 
 
