@@ -103,19 +103,19 @@ describe 'number of a kind' do
   end
 
   it 'can tell if a hand contains four of a kind' do
-    #     assert kind(4, fkranks) == 9
+    number_of_kind(4, @fk_ranks).must_equal 9
   end
 
   it 'can tell if a hand is does not contain three of a kind' do
-    #     assert kind(3, fkranks) == None
+    number_of_kind(3, @fk_ranks).must_equal nil
   end
 
   it 'can tell if a hand does not contain two of a kind' do
-    #     assert kind(2, fkranks) == None
+    number_of_kind(2, @fk_ranks).must_equal nil
   end
 
   it 'can tell if a hand contains only one of a kind' do
-    #     assert kind(1, fkranks) == 7
+    number_of_kind(1, @fk_ranks).must_equal 7
   end
 
 end

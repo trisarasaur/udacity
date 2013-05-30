@@ -13,6 +13,14 @@ def card_values hand
   values.map { |v| lookup[v] }.sort.reverse
 end
 
+def number_of_kind number, values
+  counted = values.group_by { |v| v }
+  kind = nil
+  counted.each do |k,v| 
+       kind = k if v.length == number
+    end
+  kind 
+end
 
 def flush? hand
   suits = hand.map { |card| card[1] }
