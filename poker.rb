@@ -3,12 +3,18 @@ class Game
   attr_reader :deck
 
   def initialize players, number_cards = 5
-    @deck = make_deck.shuffle
     @players = players
     @number_cards = number_cards
+    @deck = make_deck.shuffle
   end
 
   def deal
+    hand_list = []
+    @players.times {hand_list << deal_hand }
+    hand_list
+  end
+
+  def deal_hand
     hand = []
     @number_cards.times { hand << @deck.pop }
     hand
