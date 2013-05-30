@@ -65,11 +65,11 @@ describe 'flush' do
   end
   
   it 'can tell if a hand is a flush' do
-    #     assert flush(sf) == True
+    flush(@straight_flush).must_equal true
   end
 
   it 'can tell if a hand is not a flush' do
-    #     assert flush(fk) == False
+    flush(@four_kind).must_equal false
   end
 
 end
