@@ -85,11 +85,11 @@ describe 'two pair' do
   end
   
   it 'gives a list of the pairs when given a hand with two pair' do
-    #     assert two_pair(tpranks) == (9, 6)
+    two_pair(@tp_ranks).must_equal [9,6]
   end
 
   it 'returns nil when a hand is not a two pair' do
-    #     assert two_pair(fkranks) == None
+    two_pair(@fk_ranks).must_equal nil
   end
 
 end

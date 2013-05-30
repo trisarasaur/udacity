@@ -22,6 +22,17 @@ def number_of_kind number, values
   kind 
 end
 
+def two_pair values
+  first_pair = number_of_kind(2, values)
+  second_pair = number_of_kind(2, values.reverse)
+  
+  if first_pair != second_pair
+    [first_pair, second_pair].sort.reverse
+  else
+    nil
+  end
+end
+
 def flush? hand
   suits = hand.map { |card| card[1] }
   if suits.uniq.length == 1
