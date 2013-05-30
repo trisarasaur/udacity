@@ -80,8 +80,8 @@ describe 'two pair' do
   before do
     @four_kind = "9D 9H 9S 9C 7D".split 
     @two_pair = "9D 9H 6C 6D AH".split 
-    # @fk_ranks = card_ranks(@fk)
-    # @tp_ranks = card_ranks(@tp)
+    @fk_ranks = card_values(@four_kind)
+    @tp_ranks = card_values(@two_pair)
   end
   
   it 'gives a list of the pairs when given a hand with two pair' do
@@ -99,7 +99,7 @@ describe 'number of a kind' do
 
   before do
     @four_kind = "9D 9H 9S 9C 7D".split 
-    # @fk_ranks = card_ranks(@fk)
+    @fk_ranks = card_values(@four_kind)
   end
 
   it 'can tell if a hand contains four of a kind' do
