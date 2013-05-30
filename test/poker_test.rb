@@ -10,19 +10,20 @@ describe 'poker game' do
     @four_kind = "9D 9H 9S 9C 7D".split 
     @full_house = "TD TC TH 7C 7D".split 
     @two_pair = "9D 9H 6C 6D AH".split 
-    @other_two_pair = "9C 9S 6H 6S AD".split 
+    @other_two_pair = "9C 9S 6H 6S AD".split
+    @more_two_pair = "9D 9C 6D 6H AS".split 
   end
 
   it 'gives correct winning hand with three hands' do
-    poker([@straight_flush, @four_kind, @full_house]).must_equal @straight_flush
+    poker([@straight_flush, @four_kind, @full_house]).must_equal [@straight_flush]
   end
 
   it 'gives correct winning hand with four of a kind and a full house' do
-    poker([@four_kind, @full_house]).must_equal @four_kind
+    poker([@four_kind, @full_house]).must_equal [@four_kind]
   end
   
   it 'gives correct winning hand when given only one hand' do
-    poker([@straight_flush]).must_equal @straight_flush
+    poker([@straight_flush]).must_equal [@straight_flush]
   end
 
   it 'gives correct winning hands with identical hands' do
@@ -30,11 +31,15 @@ describe 'poker game' do
   end
 
   it 'gives correct winning hand when given 100 hands' do
-    poker([@straight_flush] + [@full_house] * 99).must_equal @straight_flush
+    poker([@straight_flush] + [@full_house] * 99).must_equal [@straight_flush]
   end
 
-  it 'returns multiple winning hands when there is a tie' do
+  it 'returns two winning hands when there is a tie' do
     poker([@two_pair, @other_two_pair]).sort.must_equal [@two_pair, @other_two_pair].sort
+  end
+
+  it 'returns multiple winning hands when there are multiple ties' do
+    poker([@two_pair, @other_two_pair, @more_two_pair]).sort.must_equal [@two_pair, @other_two_pair, @more_two_pair].sort
   end
 
 end

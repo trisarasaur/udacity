@@ -1,10 +1,15 @@
 def poker hands
   ranked = hands.sort_by {|h| hand_rank(h)}.reverse
-  if ranked.length >1 && card_values(ranked[0]) == card_values(ranked[1]) 
-    [ranked[0], ranked[1]]
-  else
-    ranked[0]
+  first_winner = ranked[0]
+  winners = []
+
+  ranked.each do |hand|
+    if card_values(hand) == card_values(first_winner)
+      winners << hand
+    end
   end
+
+  winners
 end
 
 def hand_rank hand
