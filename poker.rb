@@ -13,32 +13,31 @@ def poker hands
 end
 
 def hand_rank hand
-  if straight?(hand) && flush?(hand) 
-    # 8 straight flush
+  if straight_flush?(hand)
     [8, card_values(hand).max]
-  elsif number_of_kind(4, card_values(hand)) != nil 
-    # 7 four of a kind
-    [7, number_of_kind(4, card_values(hand)), number_of_kind(1, card_values(hand))]
-  elsif number_of_kind(3, card_values(hand)) != nil && number_of_kind(2, card_values(hand)) !=nil  
-    #6 full house
-    [6, number_of_kind(3, card_values(hand)), number_of_kind(2, card_values(hand))]
+
+  elsif four_of_a_kind?(hand)
+    [7, four_of_a_kind(hand), one_of_a_kind(hand)]
+
+  elsif full_house?(hand)
+    [6, three_of_a_kind(hand), two_of_a_kind(hand)]
+
   elsif flush?(hand)
-    #5 flush
     [5] + card_values(hand)
+
   elsif straight?(hand)
-    #4 straight
     [4, card_values(hand).max]
-  elsif number_of_kind(3, card_values(hand)) != nil
-    #3 three of a kind
-    [3, number_of_kind(3, card_values(hand))] + card_values(hand)
-  elsif two_pair(hand) != nil 
-    #2 two pair
+
+  elsif three_of_a_kind?(hand)
+    [3, three_of_a_kind(hand)] + card_values(hand)
+
+  elsif two_pair?(hand)
     [2] + two_pair(hand) + card_values(hand)
-  elsif number_of_kind(2, card_values(hand)) != nil
-    #1 one pair
-    [1, number_of_kind(2, card_values(hand))] + card_values(hand)
+
+  elsif one_pair?(hand)
+    [1, two_of_a_kind(hand)] + card_values(hand)
+
   else 
-    #0 high card
     [0] + card_values(hand)
   end
 end
@@ -61,6 +60,22 @@ def number_of_kind number, values
   kind 
 end
 
+def four_of_a_kind hand
+  number_of_kind(4, card_values(hand))
+end
+
+def three_of_a_kind hand
+  number_of_kind(3, card_values(hand))
+end
+
+def two_of_a_kind hand
+  number_of_kind(2, card_values(hand))
+end
+
+def one_of_a_kind hand
+  number_of_kind(1, card_values(hand))
+end
+
 def two_pair hand
   values = card_values(hand)
   
@@ -72,6 +87,18 @@ def two_pair hand
   else
     nil
   end
+end
+
+def straight_flush? hand
+  straight?(hand) && flush?(hand) 
+end
+
+def four_of_a_kind? hand
+  number_of_kind(4, card_values(hand)) != nil 
+end
+
+def full_house? hand
+  number_of_kind(3, card_values(hand)) != nil && number_of_kind(2, card_values(hand)) !=nil  
 end
 
 def flush? hand
@@ -86,6 +113,18 @@ end
 def straight? hand
   values = card_values(hand)
   (values.last..values.first).to_a.reverse == values 
+end
+
+def three_of_a_kind? hand
+  number_of_kind(3, card_values(hand)) != nil
+end
+
+def two_pair? hand
+  two_pair(hand) != nil 
+end
+
+def one_pair? hand
+  number_of_kind(2, card_values(hand)) != nil
 end
 
 
