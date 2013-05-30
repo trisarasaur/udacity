@@ -10,7 +10,7 @@ Because these are based on course examples, the implementation will reflect desi
 Projects included here
 ----------------------
 
-* From [Design of Computer Programs](http://www.udacity.com/course/cs212):
+From [Design of Computer Programs](http://www.udacity.com/course/cs212):
 
-** Winning Poker Hands, from Lesson 1
+* Winning Poker Hands, from Lesson 1
 
