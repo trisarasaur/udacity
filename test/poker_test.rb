@@ -25,9 +25,8 @@ describe 'poker game' do
     poker([@straight_flush]).must_equal @straight_flush
   end
 
-  it 'gives correct winning hand with identical hands' do
-    # this actually tests the wrong thing, it should return two hands, which are identical
-    poker([@full_house, @full_house]).must_equal @full_house
+  it 'gives correct winning hands with identical hands' do
+    poker([@full_house, @full_house]).must_equal [@full_house, @full_house]
   end
 
   it 'gives correct winning hand when given 100 hands' do
@@ -35,8 +34,7 @@ describe 'poker game' do
   end
 
   it 'returns multiple winning hands when there is a tie' do
-    skip
-    poker([@two_pair, @other_two_pair]).must_equal [@two_pair, @other_two_pair]
+    poker([@two_pair, @other_two_pair]).sort.must_equal [@two_pair, @other_two_pair].sort
   end
 
 end

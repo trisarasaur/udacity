@@ -1,5 +1,10 @@
 def poker hands
-  hands.max_by {|h| hand_rank(h) }
+  ranked = hands.sort_by {|h| hand_rank(h)}.reverse
+  if ranked.length >1 && card_values(ranked[0]) == card_values(ranked[1]) 
+    [ranked[0], ranked[1]]
+  else
+    ranked[0]
+  end
 end
 
 def hand_rank hand
