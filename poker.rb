@@ -3,6 +3,36 @@ def poker hands
 
 end
 
+def hand_rank hand
+  if straight?(hand) && flush?(hand) 
+    # 8 straight flush
+    [8, card_values(hand).max]
+  elsif number_of_kind(4, card_values(hand)) != nil 
+    # 7 four of a kind
+    [7, number_of_kind(4, card_values(hand)), number_of_kind(1, card_values(hand))]
+  elsif number_of_kind(3, card_values(hand)) != nil && number_of_kind(2, card_values(hand)) !=nil  
+    #6 full house
+    [6, number_of_kind(3, card_values(hand)), number_of_kind(2, card_values(hand))]
+  elsif flush?(hand)
+    #5 flush
+    [5] + card_values(hand)
+  elsif straight?(hand)
+    #4 straight
+    [4, card_values(hand).max]
+  elsif number_of_kind(3, card_values(hand)) != nil
+    #3 three of a kind
+    [3, number_of_kind(3, card_values(hand))] + card_values(hand)
+  elsif two_pair(hand) != nil 
+    #2 two pair
+    [2] + two_pair(hand) + card_values(hand)
+  elsif number_of_kind(2, card_values(hand)) != nil
+    #1 one pair
+    [1, number_of_kind(2, card_values(hand))] + card_values(hand)
+  else 
+    #0 high card
+    [0] + card_values(hand)
+  end
+end
 
 def card_values hand
   values = hand.map { |card| card[0] }

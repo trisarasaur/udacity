@@ -129,27 +129,51 @@ describe 'hand rankings' do
     @straight_flush = "6C 7C 8C 9C TC".split 
     @four_kind = "9D 9H 9S 9C 7D".split 
     @full_house = "TD TC TH 7C 7D".split 
+    @flush = "AS JS TS 6S 3S".split
+    @straight = "9S 8D 7S 6H 5C".split
+    @three_kind = "4C 4H 4D QS 2S".split
     @two_pair = "9D 9H 6C 6D AH".split  
+    @one_pair = "2D 2H QH 7H 6C".split
+    @high_card = "AH KH QC TH 2C".split
   end
   
   it 'knows the hand rank of a straight flush'  do
-    #     assert hand_rank(sf) == (8, 10)
+    hand_rank(@straight_flush).must_equal [8,10]
   end
 
   it 'knows the hand rank of four of a kind' do
-    #     assert hand_rank(fk) == (7, 9, 7)
+    hand_rank(@four_kind).must_equal [7,9,7]
   end
 
   it 'knows the hand rank of a full house' do
-    #     assert hand_rank(fh) == (6, 10, 7)
+    hand_rank(@full_house).must_equal [6, 10, 7]
   end
 
-  it 'knows the hand rank of a two_pair' do
-    skip
+  it 'knows the hand rank of a flush' do
+    hand_rank(@flush).must_equal [5, 14, 11, 10, 6, 3]
+  end
+
+  it 'knows the hand rank of a straight' do
+    hand_rank(@straight).must_equal [4, 9]
+  end
+
+  it 'knows the hand rank of three of a kind' do
+    hand_rank(@three_kind).must_equal [3, 4, 12, 4, 4, 4, 2] 
+  end
+
+  it 'knows the hand rank of a two pair' do
+    hand_rank(@two_pair).must_equal [2, 9, 6, 14, 9, 9, 6, 6]
+  end
+
+  it 'knows the hand rank of a one pair' do
+    hand_rank(@one_pair).must_equal [1 , 2, 12, 7, 6, 2, 2]
+  end
+
+  it 'knows the hand rank of a high card hand' do
+    hand_rank(@high_card).must_equal [0, 14, 13, 12, 10, 2]
   end
 
 end
-
 
 describe 'card number values' do
 
