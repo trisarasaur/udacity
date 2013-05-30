@@ -24,7 +24,7 @@ def flush? hand
 end
 
 def straight? values
-  (values.last..values.first).to_a.reverse == values && values.max - values.min == 4
+  (values.last..values.first).to_a.reverse == values 
 end
 
 
