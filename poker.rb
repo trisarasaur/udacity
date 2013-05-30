@@ -22,7 +22,9 @@ def number_of_kind number, values
   kind 
 end
 
-def two_pair values
+def two_pair hand
+  values = card_values(hand)
+  
   first_pair = number_of_kind(2, values)
   second_pair = number_of_kind(2, values.reverse)
   
@@ -42,7 +44,8 @@ def flush? hand
   end
 end
 
-def straight? values
+def straight? hand
+  values = card_values(hand)
   (values.last..values.first).to_a.reverse == values 
 end
 

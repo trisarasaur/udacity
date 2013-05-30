@@ -45,13 +45,17 @@ end
 
 
 describe 'straight' do 
+  before do
+    @straight = "9C 8H 7D 6S 5C".split
+    @not_straight = "9C 8H 8D 6S 5C".split
+  end
 
   it 'can tell if a hand is a straight' do
-    straight?([9, 8, 7, 6, 5]).must_equal true
+    straight?(@straight).must_equal true
   end
 
   it 'can tell if a hand is not a straight' do
-    straight?([9, 8, 8, 6, 5]).must_equal false
+    straight?(@not_straight).must_equal false
   end
 
 end
@@ -80,16 +84,14 @@ describe 'two pair' do
   before do
     @four_kind = "9D 9H 9S 9C 7D".split 
     @two_pair = "9D 9H 6C 6D AH".split 
-    @fk_ranks = card_values(@four_kind)
-    @tp_ranks = card_values(@two_pair)
   end
   
   it 'gives a list of the pairs when given a hand with two pair' do
-    two_pair(@tp_ranks).must_equal [9,6]
+    two_pair(@two_pair).must_equal [9,6]
   end
 
   it 'returns nil when a hand is not a two pair' do
-    two_pair(@fk_ranks).must_equal nil
+    two_pair(@four_kind).must_equal nil
   end
 
 end
