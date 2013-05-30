@@ -1,3 +1,28 @@
+class Game
+
+  attr_reader :deck
+
+  def initialize players, number_cards = 5
+    @deck = make_deck.shuffle
+    @players = players
+    @number_cards = number_cards
+  end
+
+  def deal
+    hand = []
+    @number_cards.times { hand << @deck.pop }
+    hand
+  end
+
+  def make_deck
+    values = %w[2 3 4 5 6 7 8 9 T J Q K A]
+    suits = %w[S H D C]
+    values.map { |value| suits.map { |suit|value + suit } }.flatten
+  end
+
+end
+
+
 def poker hands
   ranked = hands.sort_by {|h| hand_rank(h)}.reverse
   first_winner = ranked[0]

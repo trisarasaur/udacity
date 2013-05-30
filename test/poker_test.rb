@@ -3,6 +3,23 @@ require 'minitest/autorun'
 
 require './poker.rb'
 
+describe 'Game' do
+
+  before do
+    @game = Game.new(5)
+    @deck_expected = ["2S", "2H", "2D", "2C", "3S", "3H", "3D", "3C", "4S", "4H", "4D", "4C", "5S", "5H", "5D", "5C", "6S", "6H", "6D", "6C", "7S", "7H", "7D", "7C", "8S", "8H", "8D", "8C", "9S", "9H", "9D", "9C", "TS", "TH", "TD", "TC", "JS", "JH", "JD", "JC", "QS", "QH", "QD", "QC", "KS", "KH", "KD", "KC", "AS", "AH", "AD", "AC"]
+  end
+  
+  it 'makes a deck' do
+    @game.deck.sort.must_equal @deck_expected.sort
+  end
+
+  it 'deals a hand' do
+    @game.deal.size.must_equal 5
+  end
+
+end
+
 describe 'poker game' do
 
   before do
