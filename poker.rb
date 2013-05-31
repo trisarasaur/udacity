@@ -16,6 +16,32 @@ class HandProbabilityCounter
     @dealt_hands = dealt_hands
   end
 
+  def sort_by_type dealt_hands
+    hands_by_rank = dealt_hands.group_by { |hand| hand.hand_rank[0] }
+    
+    counted = {}
+    hands_by_rank.each {|rank, hands| counted[rank] = hands.size }
+    
+    counted
+  end
+
+  def sort_by_type_name dealt_hands
+    counted_list = sort_by_type(dealt_hands)
+    hand_kind_list = [
+                      "High Card",
+                      "One Pair",
+                      "Two Pair",
+                      "Three of a Kind",
+                      "Straight",
+                      "Flush",
+                      "Full House",
+                      "Four of a Kind",
+                      "Straight Flush"
+                      ]
+    percents = hand_kind_list.map.with_index {|name, i| name +  ": " + (((counted_list[i] || 0 ).to_f/@dealt_hands.size)*100).round(3).to_s + "%" }
+  end
+
+
 end
 
 class Game

@@ -6,11 +6,22 @@ require './poker.rb'
 describe 'counting probability' do
   
   before do
-    @dealt_hands = HandProbabilityCounter.new.deal_hands(700)
+    #set number_of_cycles to 700,000 for more accurate sampling. Takes around 200 seconds.
+    @counter = HandProbabilityCounter.new
+    @number_of_cycles = 7000
+    @dealt_hands = @counter.deal_hands(@number_of_cycles)
   end
 
   it 'deals a lot of hands' do
-    @dealt_hands.size.must_equal 700
+    @dealt_hands.size.must_equal @number_of_cycles
+  end
+
+  it 'sorts by type with number' do
+    @counter.sort_by_type(@dealt_hands).values.inject(0, :+).must_equal @number_of_cycles
+  end
+
+  it 'sorts by type with name' do
+   puts @counter.sort_by_type_name(@dealt_hands)
   end
 
 end
