@@ -63,6 +63,22 @@ def poker hands
   winners
 end
 
+class Hand
+
+  def initialize cards
+    @cards = cards
+  end
+
+  def card_values
+    values = @cards.map { |card| card[0] }
+    lookup = {}
+    %w[- - 2 3 4 5 6 7 8 9 T J Q K A].each_with_index do |item, index|
+      lookup[item] = index
+    end
+    values.map { |v| lookup[v] }.sort.reverse
+  end
+end
+
 def hand_rank hand
   if straight_flush?(hand)
     [8, card_values(hand).max]
@@ -93,13 +109,9 @@ def hand_rank hand
   end
 end
 
+
 def card_values hand
-  values = hand.map { |card| card[0] }
-  lookup = {}
-  %w[- - 2 3 4 5 6 7 8 9 T J Q K A].each_with_index do |item, index|
-    lookup[item] = index
-  end
-  values.map { |v| lookup[v] }.sort.reverse
+  Hand.new(hand).card_values
 end
 
 def number_of_kind number, values
