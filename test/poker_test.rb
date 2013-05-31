@@ -135,7 +135,7 @@ describe 'number of a kind' do
 
   before do
     @four_kind = "9D 9H 9S 9C 7D".split 
-    @fk_ranks = card_values(@four_kind)
+    @fk_ranks = Hand.new(@four_kind).card_values
   end
 
   it 'can tell if a hand contains four of a kind' do
@@ -212,7 +212,7 @@ end
 describe 'card number values' do
 
   it 'knows the card number values of a given hand' do
-    card_values(['AC', '3D', '4S', 'KH']).must_equal [14, 13, 4, 3]
+    Hand.new(['AC', '3D', '4S', 'KH']).card_values.must_equal [14, 13, 4, 3]
   end
 
 end

@@ -55,7 +55,7 @@ def poker hands
   winners = []
 
   ranked.each do |hand|
-    if card_values(hand) == card_values(first_winner)
+    if Hand.new(hand).card_values == Hand.new(first_winner).card_values
       winners << hand
     end
   end
@@ -80,8 +80,10 @@ class Hand
 end
 
 def hand_rank hand
+  my_hand = Hand.new(hand)
+
   if straight_flush?(hand)
-    [8, card_values(hand).max]
+    [8, my_hand.card_values.max]
 
   elsif four_of_a_kind?(hand)
     [7, four_of_a_kind(hand), one_of_a_kind(hand)]
@@ -90,29 +92,25 @@ def hand_rank hand
     [6, three_of_a_kind(hand), two_of_a_kind(hand)]
 
   elsif flush?(hand)
-    [5] + card_values(hand)
+    [5] + my_hand.card_values
 
   elsif straight?(hand)
-    [4, card_values(hand).max]
+    [4, my_hand.card_values.max]
 
   elsif three_of_a_kind?(hand)
-    [3, three_of_a_kind(hand)] + card_values(hand)
+    [3, three_of_a_kind(hand)] + my_hand.card_values
 
   elsif two_pair?(hand)
-    [2] + two_pair(hand) + card_values(hand)
+    [2] + two_pair(hand) + my_hand.card_values
 
   elsif one_pair?(hand)
-    [1, two_of_a_kind(hand)] + card_values(hand)
+    [1, two_of_a_kind(hand)] + my_hand.card_values
 
   else 
-    [0] + card_values(hand)
+    [0] + my_hand.card_values
   end
 end
 
-
-def card_values hand
-  Hand.new(hand).card_values
-end
 
 def number_of_kind number, values
   counted = values.group_by { |v| v }
@@ -124,23 +122,23 @@ def number_of_kind number, values
 end
 
 def four_of_a_kind hand
-  number_of_kind(4, card_values(hand))
+  number_of_kind(4, Hand.new(hand).card_values)
 end
 
 def three_of_a_kind hand
-  number_of_kind(3, card_values(hand))
+  number_of_kind(3, Hand.new(hand).card_values)
 end
 
 def two_of_a_kind hand
-  number_of_kind(2, card_values(hand))
+  number_of_kind(2, Hand.new(hand).card_values)
 end
 
 def one_of_a_kind hand
-  number_of_kind(1, card_values(hand))
+  number_of_kind(1, Hand.new(hand).card_values)
 end
 
 def two_pair hand
-  values = card_values(hand)
+  values = Hand.new(hand).card_values
   
   first_pair = number_of_kind(2, values)
   second_pair = number_of_kind(2, values.reverse)
@@ -157,11 +155,11 @@ def straight_flush? hand
 end
 
 def four_of_a_kind? hand
-  number_of_kind(4, card_values(hand)) != nil 
+  number_of_kind(4, Hand.new(hand).card_values) != nil 
 end
 
 def full_house? hand
-  number_of_kind(3, card_values(hand)) != nil && number_of_kind(2, card_values(hand)) !=nil  
+  number_of_kind(3, Hand.new(hand).card_values) != nil && number_of_kind(2, Hand.new(hand).card_values) !=nil  
 end
 
 def flush? hand
@@ -174,12 +172,12 @@ def flush? hand
 end
 
 def straight? hand
-  values = card_values(hand)
+  values = Hand.new(hand).card_values
   (values.last..values.first).to_a.reverse == values 
 end
 
 def three_of_a_kind? hand
-  number_of_kind(3, card_values(hand)) != nil
+  number_of_kind(3, Hand.new(hand).card_values) != nil
 end
 
 def two_pair? hand
@@ -187,7 +185,7 @@ def two_pair? hand
 end
 
 def one_pair? hand
-  number_of_kind(2, card_values(hand)) != nil
+  number_of_kind(2, Hand.new(hand).card_values) != nil
 end
 
 
