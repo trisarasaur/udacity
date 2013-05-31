@@ -37,7 +37,7 @@ class Game
   def deal_hand
     hand = []
     @number_cards.times { hand << @deck.pop }
-    hand
+    Hand.new(hand)
   end
 
   def make_deck

@@ -27,7 +27,7 @@ describe 'Game' do
   end
 
   it 'deals a hand' do
-    @game.deal_hand.size.must_equal 5
+    @game.deal_hand.cards.size.must_equal 5
   end
 
   it 'deals hands to all players' do
