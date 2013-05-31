@@ -1,3 +1,23 @@
+class HandProbabilityCounter
+
+  attr_reader :dealt_hands
+
+  def initialize 
+  end
+
+  def deal_hands n=700*1000
+    dealt_hands = []
+
+    n.times do
+      game = Game.new(1)
+      dealt_hands << game.deal_hand
+    end
+
+    @dealt_hands = dealt_hands
+  end
+
+end
+
 class Game
 
   attr_reader :deck

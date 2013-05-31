@@ -3,6 +3,18 @@ require 'minitest/autorun'
 
 require './poker.rb'
 
+describe 'counting probability' do
+  
+  before do
+    @dealt_hands = HandProbabilityCounter.new.deal_hands(700)
+  end
+
+  it 'deals a lot of hands' do
+    @dealt_hands.size.must_equal 700
+  end
+
+end
+
 describe 'Game' do
 
   before do
