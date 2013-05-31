@@ -49,7 +49,7 @@ class Game
 end
 
 
-def poker hands
+def determine_winner hands
   ranked = hands.sort_by {|h| h.hand_rank}.reverse
   first_winner = ranked[0]
   winners = []
